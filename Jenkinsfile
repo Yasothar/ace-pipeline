@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         // Adjust these paths to match your local ACE installation
-        ACE_INSTALL_DIR = '/opt/ibm/ace-12.0.x.x'
-        INTEGRATION_NODE_NAME = 'NODE01'
-        INTEGRATION_SERVER_NAME = 'server1'
+        ACE_INSTALL_DIR = 'C:\Program Files\IBM\ACE\12.0.10.0'
+        INTEGRATION_NODE_NAME = 'INODE'
+        INTEGRATION_SERVER_NAME = 'IS1'
         BAR_FILE_NAME = 'YourIntegration.bar' // Name of your BAR file to be created
         APPLICATION_NAME = 'YourIntegrationApp' // Name of the ACE application
     }
@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'github-credentials', url: 'https://github.com/Yasothar/your-ace-repo.git'
+                git credentialsId: 'github-credentials', url: 'https://github.com/Yasothar/ace-pipeline'
             }
         }
 
