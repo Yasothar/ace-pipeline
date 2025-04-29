@@ -6,8 +6,8 @@ pipeline {
         ACE_INSTALL_DIR = 'C:\Program Files\IBM\ACE\12.0.10.0'
         INTEGRATION_NODE_NAME = 'INODE'
         INTEGRATION_SERVER_NAME = 'IS1'
-        BAR_FILE_NAME = 'YourIntegration.bar' // Name of your BAR file to be created
-        APPLICATION_NAME = 'YourIntegrationApp' // Name of the ACE application
+        BAR_FILE_NAME = 'SampleApp.bar' // Name of your BAR file to be created
+        APPLICATION_NAME = 'SampleApp' // Name of the ACE application
     }
 
     stages {
