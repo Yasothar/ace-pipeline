@@ -1,0 +1,5 @@
+.metadata/
+.m2/
+target/
+bin/
+*.bar
