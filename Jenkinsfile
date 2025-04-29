@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'github-credentials', url: 'https://github.com/Yasothar/ace-pipeline.git'
+                git credentialsId: 'github-credentials', url: 'https://github.com/Yasothar/ace-pipeline.git', branch: 'main'
             }
         }
 
