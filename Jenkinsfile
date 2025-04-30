@@ -11,7 +11,13 @@ pipeline {
     }
 
     stages {
-	
+		
+		stage('Test Simple WSL Command') {
+			steps {
+				sh 'wsl.exe echo "Hello from Windows"'
+			}
+		}
+		
 	    stage('Check WSL Executable') {
 			steps {
 				sh '''
