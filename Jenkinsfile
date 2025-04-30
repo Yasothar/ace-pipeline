@@ -21,7 +21,7 @@ pipeline {
 			steps {
 				script {
 					def windowsMqsicreatebarPath = "${WINDOWS_ACE_INSTALL_DIR}\\server\\bin\\mqsicreatebar.exe".replace('\\\\', '\\')
-					def wslExePath = 'C:\\\\Windows\\\\System32\\\\wsl.exe'.replace('\\\\', '\\') // Full Windows path to wsl.exe
+					def wslExePath = '/mnt/c/Windows/System32/wsl.exe'
 					def createBarCommand = "${wslExePath} \"${windowsMqsicreatebarPath}\" -data . -b ${BAR_FILE_NAME} -o ."
 
 					echo "Executing command: ${createBarCommand}"
