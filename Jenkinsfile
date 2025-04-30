@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // Execute mqsicreatebar.exe directly since Jenkins is on Windows
-                    def mqsicreatebarPath = "${ACE_INSTALL_DIR}\\server\\bin\\mqsicreatebar.exe"
+                    def mqsicreatebarPath = "${ACE_INSTALL_DIR}\\tools\\mqsicreatebar.exe"
                     def createBarCommand = "\"${mqsicreatebarPath}\" -data . -b ${BAR_FILE_NAME} -o ."
 
                     echo "Executing command: ${createBarCommand}"
