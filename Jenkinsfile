@@ -10,9 +10,6 @@ pipeline {
         APPLICATION_NAME = 'SampleApp' // Name of the ACE application
     }
 	
-	
-	def ACE_INSTALL_DIR = 'C:\\\\Program Files\\\\IBM\\\\ACE\\\\12.0.10.0'
-	def WINDOWS_MQSI_CREATE_BAR = "${ACE_INSTALL_DIR}\\server\\bin\\mqsicreatebar.exe".replace('\\\\', '\\') // Use single backslashes for wslpath
     stages {
         stage('Checkout') {
             steps {
