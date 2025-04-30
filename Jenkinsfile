@@ -4,7 +4,7 @@ pipeline {
     environment {
         // Adjust these paths to match your local ACE installation on Windows
         ACE_INSTALL_DIR = 'C:\\Program Files\\IBM\\ACE\\13.0.3.0'
-        INTEGRATION_NODE_NAME = 'INODE'
+        INTEGRATION_NODE_NAME = 'INODE13'
         INTEGRATION_SERVER_NAME = 'IS1'
         BAR_FILE_NAME = 'SampleApp.bar' // Name of your BAR file to be created
         APPLICATION_NAME = 'SampleApp' // Name of the ACE application
