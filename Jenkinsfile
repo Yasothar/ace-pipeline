@@ -11,6 +11,12 @@ pipeline {
     }
 
     stages {
+	
+	    stage('Test WSL with Sudo') {
+			steps {
+				sh 'sudo -u jenkins /mnt/c/Windows/System32/wsl.exe echo "Hello from Windows (via sudo)"'
+			}
+		}
 		
 		stage('Test Simple WSL Command') {
 			steps {
