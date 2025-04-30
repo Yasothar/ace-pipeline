@@ -18,29 +18,29 @@ pipeline {
         }
 
         stage('Build BAR File on Windows') {
-            steps {
-                script {
-                    // Construct the Windows command to run via WSL
-                    def windowsMqsicreatebarPath = "${WINDOWS_ACE_INSTALL_DIR}\\server\\bin\\mqsicreatebar.exe".replace('\\\\', '\\')
-                    def createBarCommand = "wsl.exe \"${windowsMqsicreatebarPath}\" -data . -b ${BAR_FILE_NAME} -o ."
+			steps {
+				script {
+					def windowsMqsicreatebarPath = "${WINDOWS_ACE_INSTALL_DIR}\\server\\bin\\mqsicreatebar.exe".replace('\\\\', '\\')
+					def wslExePath = 'C:\\\\Windows\\\\System32\\\\wsl.exe'.replace('\\\\', '\\') // Full Windows path to wsl.exe
+					def createBarCommand = "${wslExePath} \"${windowsMqsicreatebarPath}\" -data . -b ${BAR_FILE_NAME} -o ."
 
-                    echo "Executing command: ${createBarCommand}"
-                    sh createBarCommand
-                }
-            }
-        }
+					echo "Executing command: ${createBarCommand}"
+					sh createBarCommand
+				}
+			}
+		}
 
         stage('Deploy to Local ACE on Windows') {
-            steps {
-                script {
-                    // Construct the Windows command to run via WSL
-                    def windowsMqsideployPath = "${WINDOWS_ACE_INSTALL_DIR}\\server\\bin\\mqsideploy.exe".replace('\\\\', '\\')
-                    def deployCommand = "wsl.exe \"${windowsMqsideployPath}\" -n ${INTEGRATION_NODE_NAME} -e ${INTEGRATION_SERVER_NAME} -a ${APPLICATION_NAME} -f ${BAR_FILE_NAME}"
+			steps {
+				script {
+					def windowsMqsideployPath = "${WINDOWS_ACE_INSTALL_DIR}\\server\\bin\\mqsideploy.exe".replace('\\\\', '\\')
+					def wslExePath = 'C:\\\\Windows\\\\System32\\\\wsl.exe'.replace('\\\\', '\\') // Full Windows path to wsl.exe
+					def deployCommand = "${wslExePath} \"${windowsMqsideployPath}\" -n ${INTEGRATION_NODE_NAME} -e ${INTEGRATION_SERVER_NAME} -a ${APPLICATION_NAME} -f ${BAR_FILE_NAME}"
 
-                    echo "Executing command: ${deployCommand}"
-                    sh deployCommand
-                }
-            }
-        }
+					echo "Executing command: ${deployCommand}"
+					sh deployCommand
+				}
+			}
+		}
     }
 }
