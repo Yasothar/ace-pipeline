@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Adjust these paths to match your local ACE installation on Windows
-        WINDOWS_ACE_INSTALL_DIR = 'C:\\\\Program Files\\\\IBM\\\\ACE\\\\12.0.10.0'
+        ACE_INSTALL_DIR = 'C:\\\\Program Files\\\\IBM\\\\ACE\\\\12.0.10.0'
         INTEGRATION_NODE_NAME = 'INODE'
         INTEGRATION_SERVER_NAME = 'IS1'
         BAR_FILE_NAME = 'SampleApp.bar' // Name of your BAR file to be created
@@ -11,7 +11,6 @@ pipeline {
     }
 
     stages {
-	
         stage('Checkout') {
             steps {
                 git credentialsId: 'github-credentials', url: 'https://github.com/Yasothar/ace-pipeline.git', branch: 'main'
@@ -19,29 +18,29 @@ pipeline {
         }
 
         stage('Build BAR File on Windows') {
-			steps {
-				script {
-					def windowsMqsicreatebarPath = "${WINDOWS_ACE_INSTALL_DIR}\\server\\bin\\mqsicreatebar.exe".replace('\\\\', '\\')
-					def wslExePath = '/mnt/c/Windows/System32/wsl.exe'
-					def createBarCommand = "${wslExePath} \"${windowsMqsicreatebarPath}\" -data . -b ${BAR_FILE_NAME} -o ."
+            steps {
+                script {
+                    // Execute mqsicreatebar.exe directly since Jenkins is on Windows
+                    def mqsicreatebarPath = "${ACE_INSTALL_DIR}\\server\\bin\\mqsicreatebar.exe"
+                    def createBarCommand = "\"${mqsicreatebarPath}\" -data . -b ${BAR_FILE_NAME} -o ."
 
-					echo "Executing command: ${createBarCommand}"
-					sh createBarCommand
-				}
-			}
-		}
+                    echo "Executing command: ${createBarCommand}"
+                    bat createBarCommand // Use 'bat' for Windows batch commands
+                }
+            }
+        }
 
         stage('Deploy to Local ACE on Windows') {
-			steps {
-				script {
-					def windowsMqsideployPath = "${WINDOWS_ACE_INSTALL_DIR}\\server\\bin\\mqsideploy.exe".replace('\\\\', '\\')
-					def wslExePath = 'C:\\\\Windows\\\\System32\\\\wsl.exe'.replace('\\\\', '\\') // Full Windows path to wsl.exe
-					def deployCommand = "${wslExePath} \"${windowsMqsideployPath}\" -n ${INTEGRATION_NODE_NAME} -e ${INTEGRATION_SERVER_NAME} -a ${APPLICATION_NAME} -f ${BAR_FILE_NAME}"
+            steps {
+                script {
+                    // Execute mqsideploy.exe directly since Jenkins is on Windows
+                    def mqsideployPath = "${ACE_INSTALL_DIR}\\server\\bin\\mqsideploy.exe"
+                    def deployCommand = "\"${mqsideployPath}\" -n ${INTEGRATION_NODE_NAME} -e ${INTEGRATION_SERVER_NAME} -a ${APPLICATION_NAME} -f ${BAR_FILE_NAME}"
 
-					echo "Executing command: ${deployCommand}"
-					sh deployCommand
-				}
-			}
-		}
+                    echo "Executing command: ${deployCommand}"
+                    bat deployCommand // Use 'bat' for Windows batch commands
+                }
+            }
+        }
     }
 }
