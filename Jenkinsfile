@@ -14,16 +14,6 @@ pipeline {
 	def ACE_INSTALL_DIR = 'C:\\\\Program Files\\\\IBM\\\\ACE\\\\12.0.10.0'
 	def WINDOWS_MQSI_CREATE_BAR = "${ACE_INSTALL_DIR}\\server\\bin\\mqsicreatebar.exe".replace('\\\\', '\\') // Use single backslashes for wslpath
     stages {
-	  stage('Run Windows ACE Command from WSL') {
-		steps {
-        sh """
-			windows_mqsi_create_bar=$(wslpath -w "${WINDOWS_MQSI_CREATE_BAR}")
-			echo "Windows mqsicreatebar path for wsl.exe: $windows_mqsi_create_bar"
-			# Execute the Windows command using wsl.exe, ensuring proper quoting wsl.exe "$windows_mqsi_create_bar" -data . -b SampleApp.bar -o .
-			"""
-			}
-		}
-	
         stage('Checkout') {
             steps {
                 git credentialsId: 'github-credentials', url: 'https://github.com/Yasothar/ace-pipeline.git', branch: 'main'
