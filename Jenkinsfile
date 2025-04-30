@@ -12,26 +12,6 @@ pipeline {
 
     stages {
 	
-	    stage('Test WSL with Sudo') {
-			steps {
-				sh 'sudo -u jenkins /mnt/c/Windows/System32/wsl.exe echo "Hello from Windows (via sudo)"'
-			}
-		}
-		
-		stage('Test Simple WSL Command') {
-			steps {
-			    sh 'whoami'
-				sh 'wsl.exe echo "Hello from Windows"'
-			}
-		}
-		
-	    stage('Check WSL Executable') {
-			steps {
-				sh '''
-				ls -l /mnt/c/Windows/System32/wsl.exe
-				'''
-			}
-		}
         stage('Checkout') {
             steps {
                 git credentialsId: 'github-credentials', url: 'https://github.com/Yasothar/ace-pipeline.git', branch: 'main'
