@@ -18,17 +18,21 @@ pipeline {
         }
 
         stage('Build BAR File on Windows') {
-            steps {
-                script {
-                    // Execute mqsicreatebar.exe directly since Jenkins is on Windows
-                    def mqsicreatebarPath = "${ACE_INSTALL_DIR}\\tools\\mqsicreatebar.exe"
-                    def createBarCommand = "\"${mqsicreatebarPath}\" -data . -b ${BAR_FILE_NAME} -o ."
+			steps {
+				script {
+					def mqsicreatebarPath = "C:\\Program Files\\IBM\\ACE\\13.0.3.0\\tools\\mqsicreatebar.exe"
+					def APPLICATION_NAME = 'SampleApp' // Assuming your application is named SampleApp
+					def PROJECT_NAME = 'SampleApp' // Replace with your actual project name
+					def BAR_FILE_NAME = "${APPLICATION_NAME}.bar"
 
-                    echo "Executing command: ${createBarCommand}"
-                    bat createBarCommand // Use 'bat' for Windows batch commands
-                }
-            }
-        }
+					def createBarCommand = "\"${mqsicreatebarPath}\" -data . -b \"${BAR_FILE_NAME}\" -o . -p \"${PROJECT_NAME}\""
+
+					echo "Executing command: ${createBarCommand}"
+					bat "${createBarCommand}"
+				}
+			}
+		} 
+        
 
         stage('Deploy to Local ACE on Windows') {
             steps {
