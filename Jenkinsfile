@@ -14,6 +14,7 @@ pipeline {
 		
 		stage('Test Simple WSL Command') {
 			steps {
+			    sh 'whoami'
 				sh 'wsl.exe echo "Hello from Windows"'
 			}
 		}
