@@ -45,7 +45,7 @@ pipeline {
                     def mqsideployPath = "${ACE_INSTALL_DIR}\\server\\bin\\mqsideploy.exe"
 					//def deployCommand = "\"${mqsideployPath}\" -n ${INTEGRATION_NODE_NAME} -e ${INTEGRATION_SERVER_NAME} -a ${APPLICATION_NAME} \"${BAR_FILE_NAME}\""
                     
-					def deployCommand = "\"C:\\Program Files\\IBM\\ACE\\13.0.3.0\\server\\bin\\mqsideploy.exe\" INODE13 -e IS1 -a SampleApp.bar"
+					def deployCommand = "\"C:\\Program Files\\IBM\\ACE\\13.0.3.0\\server\\bin\\mqsideploy.exe\" INODE13 -e IS1 -a "\"D:\work\ws\ws-pipeline-demo\SampleApp.bar\""
 					//def deployCommand = "\"C:\\Program Files\\IBM\\ACE\\13.0.3.0\\server\\bin\\mqsideploy.exe\" -n INODE13 -e IS1 -a "\"D:\work\ws\ws-pipeline-demo\SampleApp.bar\""
 					
 					echo "Executing command: ${deployCommand}"
