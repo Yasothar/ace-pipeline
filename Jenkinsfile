@@ -43,8 +43,10 @@ pipeline {
                 script {
                     // Execute mqsideploy.exe directly since Jenkins is on Windows
                     def mqsideployPath = "${ACE_INSTALL_DIR}\\server\\bin\\mqsideploy.exe"
-					def deployCommand = "\"${mqsideployPath}\" -n ${INTEGRATION_NODE_NAME} -e ${INTEGRATION_SERVER_NAME} -a ${APPLICATION_NAME} \"${BAR_FILE_NAME}\""
-                    echo "Executing command: ${deployCommand}"
+					//def deployCommand = "\"${mqsideployPath}\" -n ${INTEGRATION_NODE_NAME} -e ${INTEGRATION_SERVER_NAME} -a ${APPLICATION_NAME} \"${BAR_FILE_NAME}\""
+                    
+					def deployCommand = "\"C:\\Program Files\\IBM\ACE\\13.0.3.0\\server\\bin\\mqsideploy.exe" INODE13 -e IS1 -a SampleApp.bar\"
+					echo "Executing command: ${deployCommand}"
                     bat deployCommand // Use 'bat' for Windows batch commands
                 }
             }
