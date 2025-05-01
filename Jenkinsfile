@@ -22,11 +22,13 @@ pipeline {
 				script {
 					def mqsicreatebarPath = "C:\\Program Files\\IBM\\ACE\\13.0.3.0\\tools\\mqsicreatebar.exe"
 					def APPLICATION_NAME = 'SampleApp' // Assuming your application is named SampleApp
-					def PROJECT_NAME = 'D:\\work\\ws\\ws-pipeline-demo\\' // Replace with your actual project name
+					def PROJECT_NAME = 'D:\\work\\ws\\ws-pipeline-demo' // Replace with your actual project name
 					def BAR_FILE_NAME = "${APPLICATION_NAME}.bar"
 
-					def createBarCommand = "\"${mqsicreatebarPath}\" -data . -b \"${BAR_FILE_NAME}\" -o . -p \"${PROJECT_NAME}\""
-
+					//def createBarCommand = "\"${mqsicreatebarPath}\" -data a. -b \"${BAR_FILE_NAME}\" -o . -p \"${PROJECT_NAME}\""
+					
+					def "\"${mqsicreatebarPath}\" -data  \"${PROJECT_NAME}\" -b \"${BAR_FILE_NAME}\" -a \"${APPLICATION_NAME}\"
+					
 					echo "Executing command: ${createBarCommand}"
 					bat "${createBarCommand}"
 				}
