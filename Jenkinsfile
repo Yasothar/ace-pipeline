@@ -27,7 +27,7 @@ pipeline {
 
 					//def createBarCommand = "\"${mqsicreatebarPath}\" -data a. -b \"${BAR_FILE_NAME}\" -o . -p \"${PROJECT_NAME}\""
 					
-					def "\"${mqsicreatebarPath}\" -data  \"${PROJECT_NAME}\" -b \"${BAR_FILE_NAME}\" -a \"${APPLICATION_NAME}\"
+					def "\"${mqsicreatebarPath}\" -data  \"${PROJECT_NAME}\" -b \"${BAR_FILE_NAME}\" -a \"${APPLICATION_NAME}\""
 					
 					echo "Executing command: ${createBarCommand}"
 					bat "${createBarCommand}"
